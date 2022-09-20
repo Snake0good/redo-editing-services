@@ -1,25 +1,21 @@
 import { useState } from "react";
-
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Navbar from "./components/Navbar";
+import Login from "./pages/Login";
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <div className="App">
-      <h1 className="text-3xl font-bold underline">Look Ma! I'm doing React now</h1>
+      <BrowserRouter>
+        <Navbar />
 
-      <h2> { count } </h2>
-      <button 
-        className="mr-2 border-2 border-black p-2"
-        onClick={ () => setCount(count + 1) }>
-        Add One
-      </button>
-      
-      <button 
-        className="mr-2 border-2 border-black p-2"
-        onClick={ () => setCount(count - 1) }>
-        Subtract One
-      </button>
+        <Routes>
+          {/* <Route path="/" element= { <Home /> } /> */}
+          <Route path="/login" element= { <Login /> } />
+          {/* <Route path="/signup" element= { <Signup /> } /> */}
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
