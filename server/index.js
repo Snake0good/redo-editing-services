@@ -5,7 +5,7 @@ const path = require('path')
 const mongoose = require('mongoose')
 const flash = require("express-flash");
 const passport = require("passport");
-
+const cors = require('cors')
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
 // const MongoStore = require("connect-mongo")(session);
@@ -23,7 +23,7 @@ connectDB()
 //Body Parsing
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
+app.use(cors())
 
 // Setup Sessions - stored in MongoDB
 app.use(
@@ -47,7 +47,6 @@ app.use(flash())
 // setup routs for the server to listen
 app.use(express.static(path.join(__dirname, '../client/build')))
 app.use("/", mainRoutes)
-
 
 
 // server running

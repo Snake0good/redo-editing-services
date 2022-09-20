@@ -1,10 +1,12 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import Navbar from "../components/Navbar"
 
-function Login({validationErrors}) {
+function Signup({validationErrors}) {
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [confirmPassword, setConfirmPassword] = useState('')
 
     const [error, setError] = useState(null)
 
@@ -13,10 +15,10 @@ function Login({validationErrors}) {
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        const user = {name, email, password}
+        const user = {name, email, password, confirmPassword}
 
-        const response = await fetch('http://localhost:2121/login', {
-        // const response = await fetch('/login', {
+        const response = await fetch('http://localhost:2121/signup', {
+        // const response = await fetch('/signup', {
             method: 'POST',
             body: JSON.stringify(user),
             headers: {
@@ -38,7 +40,7 @@ function Login({validationErrors}) {
             setEmail('')
             setPassword('')
             setError(null)
-            console.log('Login Successful')
+            console.log('Signup Successful')
             
             // go back to the home page
             navigate('/')
@@ -55,7 +57,7 @@ function Login({validationErrors}) {
             onSubmit={handleSubmit}
             className="space-y-5 flex flex-col w-96 h-fit bg-black p-5"
         >
-            <h1 className="text-white text-3xl">Login</h1>
+            <h1 className="text-white text-3xl">Signup</h1>
             
             <input 
                 type="text"
@@ -81,10 +83,18 @@ function Login({validationErrors}) {
                 className="bg-slate-300 p-2 text-blue-800 placeholder-blue-800"    
             />
 
+            <input 
+                type="password"
+                placeholder="Confirm Password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                className="bg-slate-300 p-2 text-blue-800 placeholder-blue-800"    
+            />
+
             <button
                 className="bg-green-300 p-3 w-1/3 rounded-3xl font-bold"
             >
-                Login
+                Signup
             </button>
             
             {error && <div className="text-red-500">{error}</div>}
@@ -94,4 +104,4 @@ function Login({validationErrors}) {
     </div>
   )
 }
-export default Login
+export default Signup
